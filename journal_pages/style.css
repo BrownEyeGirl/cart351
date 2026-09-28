@@ -1,21 +1,22 @@
 
 body {
   padding: 0;
-  margin: 0;
+  margin: 10vw;
   display: grid; /* Set up the grid and justify/align to center */
   justify-content: center;
   align-content: center;
   height: 100vh; /* Body is the height of the viewport */
   overflow: hidden; /* Hide anything that goes off the window size */
-  background-color: black;
+  background-color: rgb(255, 255, 255);
 }
 
 h1 {
-  color:white;
+  color:rgb(37, 0, 141);
+  text-wrap: balance; 
 }
 
 p {
-  color: white; 
+  color: rgb(0, 0, 0); 
 }
 
 
