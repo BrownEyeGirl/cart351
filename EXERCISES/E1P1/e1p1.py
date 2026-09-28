@@ -95,7 +95,7 @@ print("Expected output: someone who has spent too much time")
 # the beginning and end of the string. Use the .strip() method.
 
 partLy = "     someone who has spent too much time    \n"
-print(partLy)
+print(partLy.strip(" "))
 
 #------------------------------------------------------------------------
 
@@ -108,7 +108,7 @@ print("Expected output: SOMEONE WHO HAS SPENT TOO MUCH TIME")
 # the string, with all whitespace removed, and with all letters converted to
 # uppercase. Use the .upper() method.
 
-print() # your code here!
+print(partLy.strip(" ").upper()) # your code here!
 
 #------------------------------------------------------------------------
 
@@ -119,8 +119,8 @@ print("Expected output: p")
 # Task 9: Modify the value assigned to variable "offset" below so that
 # the following "print" statement displays the letter "p".
 
-offset = 0
-print("apple"[offset])
+offset = 1 # 1 or 2 both print "p"
+print("apple"[offset]) 
 
 #------------------------------------------------------------------------
 
@@ -131,8 +131,8 @@ print("Expected output: jump")
 # Task 10: Modify the values assigned to variables "start" and "end"
 # below so that the following "print" statement displays the word "jump".
 
-start = 0
-end = 10
+start = 12 # starts on 12 inclusive, starts the indexing at 0
+end = 16 # ends on 16 not inclusive
 aStringSentenceAgain = "Did the cat jump out the window yesterday?"
 print(aStringSentenceAgain[start:end])
 
@@ -145,7 +145,7 @@ print("Expected output: 100")
 # Task 11: Modify the statement below so that it displays the number 100.
 # Do this using the int() function (hint: you need to use it twice).
 
-print("19" + "81")
+print(int("19") + int("81"))
 #------------------------------------------------------------------------
 
 print("\n------")
@@ -158,6 +158,8 @@ print("Expected output: test_var is less than 200")
 test_var = 90
 if test_var > 200:	
 	print("test_var is greater than 200!")
+else: 
+    print("test_var is less than 200")
 #------------------------------------------------------------------------
 
 print("\n------")
@@ -168,7 +170,7 @@ print("Expected output: the condition test passed")
 # 'the condition test passed'. Do not change the values of the varaibles.
 test_var_three = 400
 test_var_two = 800
-if test_var_three > 200 and test_var_two < 400:	
+if test_var_three > 200 and test_var_two > 400:	
 	print("the condition test passed")
 else:
 	print("the condition test not passed")
