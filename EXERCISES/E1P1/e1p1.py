@@ -7,7 +7,9 @@
 # carry out the tasks. There's a Python "print" statement before each
 # task that will display the expected output for that task; you can use
 # this to ensure that your statements are correct.
-#
+
+
+# how to go to environment from (base), run -> conda activate test1 
 
 print("------")
 print("Task 1: Arithmetic expressions")
