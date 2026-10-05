@@ -14,15 +14,43 @@ body {
   font-style: normal;
   font-size: 2rem;
   text-align: center;
+  background-color: #ffffff; /* Custom light red highlight */
+  color: #000000;            /* Text color */
+  padding: 0 0.2px;            /* Optional: adds a little breathing room */
+  transform: rotate(5deg);
 }
 
 h1 {
-  color:rgb(37, 0, 141);
+  color:#e9c7ff;
+  /* Layering smaller deep glows with wider, diffused glows */
+  text-shadow: 
+    0 0 5px #000dff,
+    0 0 10px #462aff,
+    0 0 20px #0022ff,
+    0 0 40px #00ffff;
+
   text-wrap: balance; 
+  /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+  font-family: "Futura", "Trebuchet MS", Arial, sans-serif;
+  font-size: 3rem;
+  filter: blur(4px); 
 }
 
+h2 {
+  font-family: "Futura", "Trebuchet MS", Arial, sans-serif;
+  color: rgb(255, 182, 194);
+  text-shadow: 0 0 5px #000dff,  0 0 40px #00ffff; 
+  filter: blur(1px); 
+}
+
+h3 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 p {
-  color: rgb(0, 0, 0); 
+  color: rgb(225, 210, 255); 
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  filter: blur(0.7px); 
+
 }
 
 
