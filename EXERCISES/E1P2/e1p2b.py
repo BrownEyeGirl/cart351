@@ -33,14 +33,13 @@ data = response.json()
 console = Console()
 table = Table(title="Star Wars Planets")
 
-# Add columns
+# add columns
 table.add_column("NAME", style="cyan")
 table.add_column("DIAMETER", style="magenta")
 table.add_column("POLULATION", style="green")
 
-# Add rows
+# add rows to columns
 for planet in data: 
     table.add_row(planet["name"], planet["diameter"], planet["population"])
-# table.add_row("Dec 15, 2017", "Star Wars: The Last Jedi", "$1,332,539,889")
 
 console.print(table)
