@@ -8,6 +8,14 @@ body {
   background-color: rgb(255, 255, 255);
 }
 
+#quotes {
+  font-family: "Lavishly Yours", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2rem;
+  text-align: center;
+}
+
 h1 {
   color:rgb(37, 0, 141);
   text-wrap: balance; 
@@ -42,3 +50,4 @@ header {
   transform: scale(1.03);
   opacity: 0.85;
 }
+
