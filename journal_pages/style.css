@@ -5,7 +5,10 @@ body {
   display: grid; /* Set up the grid and justify/align to center */
   justify-content: center;
   align-content: center;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
+  background-image: linear-gradient(rgba(40, 12, 167, 0.2), rgba(0, 0, 0, 0.8)), url('backdrop.jpg'); 
+  background-position: center center; 
+  background-attachment: fixed;
 }
 
 #quotes {
@@ -17,7 +20,29 @@ body {
   background-color: #ffffff; /* Custom light red highlight */
   color: #000000;            /* Text color */
   padding: 0 0.2px;            /* Optional: adds a little breathing room */
-  transform: rotate(5deg);
+  transform: rotate(4deg);
+  
+}
+
+#quotes:hover {
+  transform: rotate(-4deg); 
+}
+
+#headline {
+  background-color:black;
+  box-shadow: 0 0 20px 20px #000000; 
+  padding: 100px; 
+  max-width: 900px;
+  opacity:0.8
+}
+
+#main {
+  background-color: rgb(0, 0, 0); 
+  padding: 100px; 
+  max-width: 900px; 
+  box-shadow: 0 0 20px 20px #000000; 
+  opacity: 0.8; 
+  text-align: center;
 }
 
 h1 {
@@ -36,6 +61,14 @@ h1 {
   filter: blur(4px); 
 }
 
+h1:hover {
+  text-shadow: 
+    0 0 5px #cc00ff,
+    0 0 10px #462aff,
+    0 0 30px #00e1ff,
+    0 0 50px #00ffff;
+}
+
 h2 {
   font-family: "Futura", "Trebuchet MS", Arial, sans-serif;
   color: rgb(255, 182, 194);
@@ -45,7 +78,9 @@ h2 {
 
 h3 {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    filter: blur(1px)
 }
+
 p {
   color: rgb(225, 210, 255); 
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -79,3 +114,14 @@ header {
   opacity: 0.85;
 }
 
+
+/* side by side divs */ 
+.parent-container {
+  display: flex;       /* Aligns children horizontally */
+  gap: 5px;           /* Adds a clean space between the two divs */
+}
+
+.left-box, .right-box {
+  flex: 1;             /* Tells both boxes to take up equal width */
+  padding: 10px;
+}
