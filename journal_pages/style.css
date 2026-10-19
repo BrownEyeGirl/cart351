@@ -78,7 +78,9 @@ h2 {
 
 h3 {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    filter: blur(1px)
+    filter: blur(1px); 
+    font-size: 1.6rem;
+    color: cornflowerblue; 
 }
 
 p {
