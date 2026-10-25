@@ -12,6 +12,8 @@ body {
   background-attachment: fixed;
 }
 
+
+
 #quotes {
   font-family: "Futura", "Trebuchet MS", Arial, sans-serif;
   font-weight: 400;
@@ -46,6 +48,30 @@ body {
   text-align: center;
 }
 
+.btn-prev, .btn-next {
+  background-color: #ffffff;
+  color: rgb(50, 50, 50);
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-prev:hover, .btn-next:hover {
+  box-shadow: 0 0 10px 5px #020202;
+  color: rgb(255, 255, 255); 
+  background-color: rgb(0, 0, 0);
+}
+
+btn-prev {
+  float:left;
+}
+
+.btn-next {
+  float:right;
+  top: 0;
+}
+
 h1 {
   color:#000000;
   /* Layering smaller deep glows with wider, diffused glows */
@@ -64,10 +90,11 @@ h1 {
 
 h1:hover {
   text-shadow: 
-    0 0 5px #111111,
-    0 0 10px #333333,
-    0 0 30px #555555,
-    0 0 50px #888888;
+    0 0 5px #ab108c,
+    0 0 10px #97139e,
+    0 0 30px #9b30bf,
+    0 0 50px #b66bcd;
+  color:whitesmoke
 }
 
 h2 {
