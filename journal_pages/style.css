@@ -3,24 +3,25 @@ body {
   padding: 0;
   margin: 10vw;
   display: grid; /* Set up the grid and justify/align to center */
+  row-gap: 0;
   justify-content: center;
   align-content: center;
-  background-color: rgb(0, 0, 0);
-  background-image: linear-gradient(rgba(40, 12, 167, 0.2), rgba(0, 0, 0, 0.8)), url('backdrop.jpg'); 
+  background-color: rgb(255, 255, 255);
+  background-image: linear-gradient(rgba(40, 12, 167, 0.2), rgba(0, 0, 0, 0.8)), url('bg_pinkleaves.jpg'); 
   background-position: center center; 
   background-attachment: fixed;
 }
 
 #quotes {
-  font-family: "Lavishly Yours", cursive;
+  font-family: "Futura", "Trebuchet MS", Arial, sans-serif;
   font-weight: 400;
-  font-style: normal;
-  font-size: 2rem;
+  font-style: italic;
+  font-size: 1rem;
   text-align: center;
   background-color: #ffffff; /* Custom light red highlight */
   color: #000000;            /* Text color */
   padding: 0 0.2px;            /* Optional: adds a little breathing room */
-  transform: rotate(4deg);
+  transform: rotate(1deg);
   
 }
 
@@ -29,30 +30,30 @@ body {
 }
 
 #headline {
-  background-color:black;
-  box-shadow: 0 0 20px 20px #000000; 
+  background-color:rgb(255, 255, 255);
+  box-shadow: 0 0 20px 20px #ffffff; 
   padding: 100px; 
   max-width: 900px;
   opacity:0.8
 }
 
 #main {
-  background-color: rgb(0, 0, 0); 
+  background-color: #ffffff; 
   padding: 100px; 
   max-width: 900px; 
-  box-shadow: 0 0 20px 20px #000000; 
+  box-shadow: 0 0 20px 20px #ffffff; 
   opacity: 0.8; 
   text-align: center;
 }
 
 h1 {
-  color:#e9c7ff;
+  color:#000000;
   /* Layering smaller deep glows with wider, diffused glows */
   text-shadow: 
-    0 0 5px #000dff,
-    0 0 10px #462aff,
-    0 0 20px #0022ff,
-    0 0 40px #00ffff;
+    0 0 5px #111111,
+    0 0 10px #333333,
+    0 0 20px #555555,
+    0 0 40px #888888;
 
   text-wrap: balance; 
   /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
@@ -63,16 +64,16 @@ h1 {
 
 h1:hover {
   text-shadow: 
-    0 0 5px #cc00ff,
-    0 0 10px #462aff,
-    0 0 30px #00e1ff,
-    0 0 50px #00ffff;
+    0 0 5px #111111,
+    0 0 10px #333333,
+    0 0 30px #555555,
+    0 0 50px #888888;
 }
 
 h2 {
   font-family: "Futura", "Trebuchet MS", Arial, sans-serif;
-  color: rgb(255, 182, 194);
-  text-shadow: 0 0 5px #000dff,  0 0 40px #00ffff; 
+  color: #000000;
+  text-shadow: 0 0 5px #111111,  0 0 40px #777777; 
   filter: blur(1px); 
 }
 
@@ -80,14 +81,13 @@ h3 {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     filter: blur(1px); 
     font-size: 1.6rem;
-    color: cornflowerblue; 
+    color: #000000; 
 }
 
 p {
-  color: rgb(225, 210, 255); 
+  color: rgb(190, 190, 190); 
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   filter: blur(0.7px); 
-
 }
 
 
