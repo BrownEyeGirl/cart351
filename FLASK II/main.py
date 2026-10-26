@@ -57,7 +57,7 @@ def thank_you():
         owner_name = request.args["o_name"] 
         app.logger.info("first run to redirect")
          #url is not clean
-        #return render_template("thankyou.html",plantData = request.args) 
+        return render_template("thankyou.html",plantData = request.args) 
         
         # issue we lose the parameters! - but url is clean :)
         return redirect(url_for("thank_you")) 
