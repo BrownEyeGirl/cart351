@@ -2,7 +2,7 @@
 {% extends "base.html" %} <!-- extends statement establishes the inheritance link between the two templates, so that Jinja knows that when it is asked to render index.html it needs to embed it inside base.html -->
 <!-- Dynamically driven content -->
 {% block content %} <!-- The two templates (index.html and base.html) have matching block statements with the name content, this is how Jinja knows how to combine the two templates into one.-->
-    <h1>Hi, {{ user.username }}!</h1>
+    <h1>Hi, {{ user.username }}!</h1> <!-- double curly brackets because ? -->
     <section class = "flex-intro">
     <div class="items">
     {% for item in passedDictionary %}

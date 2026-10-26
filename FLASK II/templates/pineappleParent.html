@@ -1,0 +1,11 @@
+<!-- if we need to create additional pages for the application, 
+ we can create them as derived templates from the same base.html template .-->
+ 
+{% extends "base.html" %}
+
+{% block content %}
+    <section class = "pineAppleParent">
+        <h3> This h3  is in the Pineapple Parent template </h3>
+        {% block pine %}{% endblock %}
+    </section>
+{% endblock %}
