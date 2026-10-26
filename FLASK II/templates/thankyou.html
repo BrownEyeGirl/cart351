@@ -2,7 +2,6 @@
 {% extends "base.html" %}
 {% block content %}
   <section class = "thank-collect">
-        <h3> Thank you <span class = "highlight">{{plantData['o_name']}}</span> for adding a new plant into the plant repo!</h3> <!-- gets owners name from the main form -->
              <!-- displays more plant info from plantData.args on the thank you page-->
             {%if plantData%}
              Thank you {{plantData['o_name']}} for adding a new plant into the plant repo!
@@ -17,14 +16,7 @@
 
             {%endif %}
             <!-- alternatively -->
-            <!-- <p>Additional Plant info:</p> <!-- displays more plant info from plantData.args on the thank you page-->
-            <!-- <ul>
-            {% for p_item in plantData %}
-            <li style = "color:rgb(87, 77, 85);margin-top:10px;">{{p_item}}: 
-            <span style = "background-color: aqua;">{{plantData[p_item]}}</span>
-            </li>
-            </ul>
-            {%endfor %} -->
+          
 
         </section>
 {% endblock %}
