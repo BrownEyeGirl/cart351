@@ -1,0 +1,68 @@
+
+<!-- will be a child of base-->
+{% extends "base.html" %}
+{% block content %}
+<section class = "plant-collect">
+<div class= "formContainer">
+<!--form done using more current tags... -->
+<form id = "insertPlantForm" action = "{{url_for('thank_you')}}"> <!-- action makes it so it links to a thank_you function (which will link to thankyou.html in main.py) when the form is submitted-->
+<!-- group the related elements in a form -->
+<h3> ADD A NEW PLANT</h3>
+<fieldset>
+ <p>
+    <label>Owner Name:</label>
+    <input type="text" size="24" maxlength = "40" name = "o_name" required> 
+</p>
+
+<p>
+    <label>Plant Name:</label>
+    <input type="text" size="24" maxlength = "40" name = "p_name" required> 
+</p>
+
+<p>
+    <label>Plant Color:</label>
+    <input type="color" name = "p_color" required> 
+</p>
+<div class="range-ui">
+
+<label>Plant Condition:</label>
+
+<div>
+  <input type="range" name="p_condition" min="0" max="100" value="0" step="1" list="values" />
+  <datalist id="values">
+  <option value="0" label="almost dead!"></option>
+  <option value="100" label="super-alive"></option>
+</datalist>
+</div>
+
+</div>
+
+<p>
+  <label>Home of Plant:</label>
+  <select name="plant-home" >
+  <option value="Montreal">Montreal</option>
+  <option value="Quebec City">Quebec City</option>
+  <option value="Ottawa">Ottawa</option>
+  <option value="Winnipeg">Winnipeg</option>
+    <option value="Vancouver">Vancouver</option>
+</select>
+</p>
+<p>
+    <label>Birth Date (DD-MM-YYYY):</label>
+    <input type="date" name="a_date" required>
+</p>
+<p>
+    <label>Description:</label>
+    <textarea type = "text" rows="4" cols="50" name = "a_descript" required></textarea>
+</p>
+ <p>
+    <label></label>
+    <input id = "submitPlant" type = "submit" name = "submit" value = "submit my info" id =buttonS />
+</p>
+ </fieldset>
+
+</form>
+</div>
+</section>
+{% endblock %}
+
