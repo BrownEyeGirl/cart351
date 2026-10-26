@@ -72,4 +72,19 @@ def thank_you():
 def page_not_found(e):
     return render_template("404.html"),404
 
+@app.route("/register")
+def register():
+    return render_template("register.html")
+
+
+@app.route("/reg_thank_you",methods = ['POST', 'GET'])
+def reg_thank_you():
+    app.logger.info(request.method)
+    app.logger.info(request.form)
+    fName = request.form["f_name"]
+    #return render_template("thankyou_reg.html")
+    lName = request.form["l_name"]
+    return render_template("thankyou_reg.html", fName = fName, lName=lName)
+
+
 app.run(debug=True)
