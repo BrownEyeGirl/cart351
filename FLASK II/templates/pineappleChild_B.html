@@ -2,5 +2,5 @@
 {% extends "pineappleParent.html" %}
 {% block pine %}
     <p> PineApple child B!</p>
-    <img src = {{passedImg}}/>
+        <img src = "{{url_for('static' , filename ='images/'+passedImg)}}"/> <!-- url_for can link within static files without adding it to the path name -->
 {% endblock %}

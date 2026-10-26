@@ -32,10 +32,8 @@ def pineAppleA():
 
 @app.route("/pineappleB")
 def pineAppleB():
-
-    return render_template("pineappleChild_B.html",
-                           passedImg = "../static/images/pineapple_2.jpg" )
-
+    return render_template("pineAppleChild_B.html",
+                           passedImg = "pineapple_2.jpg" ) # simplified but same as "../static/images/pineapple_2.jpg" ), can access data in static files
 
 
 app.run(debug=True)
