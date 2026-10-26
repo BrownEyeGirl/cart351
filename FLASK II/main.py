@@ -66,4 +66,10 @@ def thank_you():
         app.logger.info("reloaded and redirected")
         return render_template("thankyou.html") 
 
+# error handler 
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html"),404
+
 app.run(debug=True)
