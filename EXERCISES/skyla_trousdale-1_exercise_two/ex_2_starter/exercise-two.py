@@ -18,13 +18,14 @@ def index():
 def getSearchCriteria():
     #fill me in :
     #replace the empty space to be url encoded
-    # imgFromNasa = imgFromNasa.replace(' ', '%20')
-    # return render_template("t1.html",
-    #                           have_results = True,
-    #                           description=description,
-    #                           imgPath = imgFromNasa
+    
+    imgFromNasa = imgFromNasa.replace(' ', '%20')
+    return render_template("t1.html",
+                               have_results = True,
+                               description=description,
+                               imgPath = imgFromNasa
                                            
-    #                        )
+                            )
     pass
 
 #*************************************************
