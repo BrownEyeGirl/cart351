@@ -6,26 +6,25 @@ app = Flask(__name__)
 # the default route
 @app.route("/")
 def index():
-      return render_template("index.html")
+    return render_template("index.html")
 
 #*************************************************
 #Task-1: GET REQUEST
-# @app.route("/t1")
-# def t1():
-#     return render_template("t1.html",have_results=False)
+@app.route("/t1")
+def t1():
+    return render_template("t1.html",have_results=False)
 #*************************************************
 @app.route("/getSearchCriteria")
 def getSearchCriteria():
     #fill me in :
     #replace the empty space to be url encoded
     
-    imgFromNasa = imgFromNasa.replace(' ', '%20')
+    imgFromNasa = imgFromNasa.replace('https://images-api.nasa.gov/search', '%20')
     return render_template("t1.html",
-                               have_results = True,
-                               description=description,
-                               imgPath = imgFromNasa
-                                           
-                            )
+                                 have_results = True,
+                                 description=description,
+                                 imgPath = imgFromNasa           
+                             )
     pass
 
 #*************************************************
