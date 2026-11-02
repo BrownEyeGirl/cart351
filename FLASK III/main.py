@@ -89,4 +89,31 @@ def saveSession():
 
 
 
+#modify session route
+@app.route('/modifySession')
+def modifySessionData():
+
+    return render_template("modifySession.html")
+
+@app.route('/modifySession')
+def modifySession():
+    app.logger.info(request.args['data_a']) # you can have ore than one form on a page, you just need to make sure the names are unique, otherwise you will get the first one that matches
+
+    #reload  - use url_for here :) - the function...
+    #but note that the data will be gone
+    # so add in a session variable
+    session['data_a'] = request.args['data_a']
+    session['data_b'] = request.args['data_b']
+    return redirect(url_for('modifySessionData'))
+
+
+ #delete session route
+@app.route('/deleteSession')
+def deleteSession():
+    # Clear the session data stored in the session object
+    session.pop('data_a', default=None)
+    session.pop('data_b', default=None)
+    return redirect(url_for('modifySessionData'))
+
+
 app.run(debug=True)
