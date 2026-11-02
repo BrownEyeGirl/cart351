@@ -74,6 +74,7 @@ def reg_thank_you():
 #add session route
 @app.route('/inputSessionData')
 def inputSessionData():
+    session['counter'] =1
     return render_template("inputSessionData.html")
 
 # save session route 
@@ -85,14 +86,17 @@ def saveSession():
     # so add in a session variable
     session['data_a'] = request.args['data_a']
     session['data_b'] = request.args['data_b']
+    
     return redirect(url_for('inputSessionData'))
 
 
 
 #modify session route
+
 @app.route('/modifySession')
 def modifySessionData():
-
+    # count 
+    session['counter'] = session.get('counter') + 1; 
     return render_template("modifySession.html")
 
 @app.route('/modifySession')
@@ -104,6 +108,8 @@ def modifySession():
     # so add in a session variable
     session['data_a'] = request.args['data_a']
     session['data_b'] = request.args['data_b']
+
+
     return redirect(url_for('modifySessionData'))
 
 
