@@ -109,7 +109,6 @@ def modifySession():
     session['data_a'] = request.args['data_a']
     session['data_b'] = request.args['data_b']
 
-
     return redirect(url_for('modifySessionData'))
 
 
@@ -120,6 +119,11 @@ def deleteSession():
     session.pop('data_a', default=None)
     session.pop('data_b', default=None)
     return redirect(url_for('modifySessionData'))
+
+# aroute
+@app.route('/getForm')
+def getFetchForm():
+    return render_template("form_fetch.html")
 
 
 app.run(debug=True)
