@@ -126,4 +126,12 @@ def getFetchForm():
     return render_template("form_fetch.html")
 
 
+# for the get. NOTE: we are no longer going to reload/redirect to a new page - rather we will send whatever response back to the caller (in this case the script.js) and then use javascript to dynamically generate markup 
+@app.route('/getDataFromForm')
+def getDataFromForm():
+    app.logger.info(request.args)
+    return ({"data_received":"success",
+    "owner":request.args['o_name'],
+    "plantname":request.args['p_name']})
+
 app.run(debug=True)

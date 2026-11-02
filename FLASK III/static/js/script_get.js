@@ -24,4 +24,9 @@ try{
 catch(err) { 
   console.log(err)
 }
+
+document.querySelector("#result-container").innerHTML += 
+       ` THE NEW RESULT: ${resJSON.data_received}
+        OWNER NAME : ${resJSON.owner}
+        PLANT NAME : ${resJSON.plantname}`
   
