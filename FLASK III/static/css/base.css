@@ -171,3 +171,14 @@ datalist {display: flex;flex-direction: row;justify-content: space-between;}
     margin-left:15%;
 }
 
+
+/* Session Css */ 
+.sessionVars{
+    background:white;
+    width:50%;
+    padding:10px;
+}
+.sessionVars input[type=submit]{
+    width:100px;
+    margin-top:10px;
+}

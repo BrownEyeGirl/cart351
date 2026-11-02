@@ -1,6 +1,9 @@
 
-from flask import Flask,render_template,request,url_for,redirect
-app = Flask(__name__)
+from flask import Flask, render_template, request, session, redirect, url_for
+
+app = Flask(__name__) # flask web application
+app.secret_key = 'BAD_SECRET_KEY' # Details on the Secret Key: https://flask.palletsprojects.com/en/2.3.x/config/#SECRET_KEY
+# NOTE: The secret key is used to cryptographically-sign the cookies used for storing the session data.
 
 #DEFAULT ROUTE
 @app.route('/')
@@ -66,6 +69,23 @@ def reg_thank_you():
      lName = request.form["l_name"]
      return render_template("thankyou_reg.html", fName = fName, lName=lName)
      #return render_template("thankyou_reg.html")
+
+
+#add session route
+@app.route('/inputSessionData')
+def inputSessionData():
+    return render_template("inputSessionData.html")
+
+# save session route 
+@app.route('/saveSession')
+def saveSession():
+    app.logger.info(request.args['data_a'])
+    #reload  - use url_for() here :) - the function...
+    #but note that the data will be gone
+    # so add in a session variable
+    session['data_a'] = request.args['data_a']
+    session['data_b'] = request.args['data_b']
+    return redirect(url_for('inputSessionData'))
 
 
 

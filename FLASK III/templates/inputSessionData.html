@@ -5,7 +5,7 @@
 <h3>SAVE SESSION VARS</h3>
 <div class= "sessionVars">
 <!-- take out the form action etc..-->
-<form id="sessionStore" method = "GET" action="/saveSession">
+<form id="sessionStore" method = "GET" action="/saveSession"> <!-- action is the route to the function in main.py that will handle the form data -->
     <p><label>DATA A:</label>
     <input type="text" size="24" maxlength="40" name="data_a" required>
   </p>  
@@ -16,4 +16,12 @@
   <input type="submit" name="submit" value="send" id=buttonS /></p>
 </form>
 </div>
+
+{%if session['data_a']%}
+<h3>LOAD SESSION VARS</h3>
+<p> Data A: {{session['data_a']}}</p>
+<p> Data B: {{session['data_b']}}</p>
+{% endif %}
+
+
 {% endblock %}

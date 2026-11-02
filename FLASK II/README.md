@@ -1,12 +1,19 @@
-## Notes on Lesson Flask II 
+# Notes on Lesson Flask II 
 
-# Setting up environment: 
+## Setting up environment: 
+<b>Activate virtual environemnts in VS Code terminal <br>
+Create virtual environment<br>
+conda create --name flaskEnv python=3.13 
+pip install flask
 
-# Notes: 
+Activate Virtual environment (if virtual environment already created)<br>
+conda activate flaskEnv
+
+## Notes: 
 Jinja doesnt know what commenting out is, just delete html instead of commenting it out, otherwise it wont work.
 
 
-# Request Object Data
+## Request Object Data
 In Flask, the Request Objectis an object that contains all the data sent from the Client to Server.
 This data can be recovered using the GET/POST Methods.
 Here is a partial list of some important properties and what they contain:
