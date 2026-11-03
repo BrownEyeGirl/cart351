@@ -17,8 +17,8 @@ def t1():
 @app.route("/getSearchCriteria")
 def getSearchCriteria():
     app.logger.info(request.args)
-    userInput = request.args['search_query'].replace(' ', '%20') # get users search query then replace the empty space to be url encoded
-    nasaAPI ="https://images-api.nasa.gov/search?q=" + userInput + "&media_type=image" # take api url and append the user input to it, then specify the media type to be image, so that we only get images back from the api
+    user_input = request.args['search_query'].replace(' ', '%20') # get users search query then replace the empty space to be url encoded
+    nasa_API ="https://images-api.nasa.gov/search?q=" + user_input + "&media_type=image" # take api url and append the user input to it, then specify the media type to be image, so that we only get images back from the api
     
     data = requests.get(nasaAPI).json() # make the request to the api using the url i just created, then get the response as json
 
@@ -41,20 +41,19 @@ def t2():
 #*************************************************
 @app.route("/getSearchCriteria_adv")
 def getSearchCriteria_adv():
- #fill me in :
     app.logger.info(request.args)
 
-    userInput = request.args['search_query'] # get users search query 
-    nasaAPI ="https://images-api.nasa.gov/search?q=" + userInput + "&media_type=image" # take api url and append the user input to it, then specify the media type to be image, so that we only get images back from the api
-    encode
-    data = requests.get(nasaAPI).json() # make the request to the api using the url i just created, then get the response as json
-    
-    imgFromNasa = data['collection']['items'][0]['links'][0]['href'] # get the first image from the results, and get the href link to it
-    imgFromNasa = imgFromNasa.replace(' ', '%20') # replace the empty space to be url encoded
+    encoded_image_links = []
 
-    description = data['collection']['items'][0]['data'][0]['description'] # get the description of the first image from the results
+    user_input = request.args['search_query'] # get users search query 
+    nasa_API ="https://images-api.nasa.gov/search?q=" + user_input + "&media_type=image" # take api url and append the user input to it, then specify the media type to be image, so that we only get images back from the api
+    data = requests.get(nasa_API).json() # make the request to the api using the url i just created, then get the response as json
 
-    return render_template("t2.html",images=encodedImageLinks)
+    for images in data['collection']['items']:
+        singleImage = images['links'][0]['href']              # first image href
+        encoded_image_links.append(singleImage.replace(' ', '%20'))  # url-encode spaces, add to list
+
+    return render_template("t2.html",images=encoded_image_links)
     pass
 
 #*************************************************

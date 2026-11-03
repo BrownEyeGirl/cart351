@@ -17,11 +17,12 @@
     </form>
 </section>
 
-{% if have_results %}
-    <section class = "results">
-        <h3>Results</h3>
-        <p> Description: {{description}}</p>
-        <img src="{{imgPath}}" alt="NASA Image" />
+{% if images %}
+    <h3>Results</h3>
+    <section class = "images-results">
+        {% for imgs in images %}
+        <img src="{{imgs}}" alt="NASA Images" />
+        {% endfor %}
     </section>
 {% endif %}
 
