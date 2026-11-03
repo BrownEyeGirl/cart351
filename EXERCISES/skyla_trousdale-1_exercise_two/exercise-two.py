@@ -24,7 +24,7 @@ def getSearchCriteria():
 
     imgFromNasa = data['collection']['items'][0]['links'][0]['href'] # get the first image from the results, and get the href link to it
     description = data['collection']['items'][0]['data'][0]['description'] # get the description of the first image from the results
-    print(description) # log the description to the console for debugging purposes
+    
     return render_template("t1.html",
                                  have_results = True,
                                  description=description,
@@ -33,18 +33,30 @@ def getSearchCriteria():
     pass
 
 
-
 #*************************************************
 # #Task-2: GET REQUEST
-# @app.route("/t2")
-# def t2():
-#     return render_template("t2.html")
+@app.route("/t2")
+def t2():
+    return render_template("t2.html")
 #*************************************************
 @app.route("/getSearchCriteria_adv")
 def getSearchCriteria_adv():
  #fill me in :
-#  return render_template("t2.html",images=encodedImageLinks)
+    app.logger.info(request.args)
+
+    userInput = request.args['search_query'] # get users search query 
+    nasaAPI ="https://images-api.nasa.gov/search?q=" + userInput + "&media_type=image" # take api url and append the user input to it, then specify the media type to be image, so that we only get images back from the api
+    encode
+    data = requests.get(nasaAPI).json() # make the request to the api using the url i just created, then get the response as json
+    
+    imgFromNasa = data['collection']['items'][0]['links'][0]['href'] # get the first image from the results, and get the href link to it
+    imgFromNasa = imgFromNasa.replace(' ', '%20') # replace the empty space to be url encoded
+
+    description = data['collection']['items'][0]['data'][0]['description'] # get the description of the first image from the results
+
+    return render_template("t2.html",images=encodedImageLinks)
     pass
+
 #*************************************************
 
 #run
