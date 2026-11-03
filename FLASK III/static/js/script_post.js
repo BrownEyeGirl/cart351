@@ -6,10 +6,7 @@ window.onload = function () {
     .addEventListener("submit", async function (event) {
       event.preventDefault();
       console.log("post form clicked")
-})
-};
-
-// format the data from the form and package it using formData
+      // format the data from the form and package it using formData
 let form = document.querySelector("#insertPlantFormFetchPost");
 let data = new FormData(form);
 
@@ -25,5 +22,11 @@ try {
         console.log(err);
     }
 
+
+})
+
+};
 // NOTE: we are NOT reloading the page, we are just updating the innerHTML of the result-container div with the new image path returned from the server. This is a common technique used in single-page applications (SPAs) to update the UI without a full page reload.
- document.querySelector("#result-container").innerHTML = `<img src = ${resJSON.imagePath} />` 
+document.querySelector("#result-container").innerHTML = `<img src = ${resJSON.imagePath} />` 
+
+

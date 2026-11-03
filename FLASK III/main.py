@@ -7,6 +7,12 @@ app = Flask(__name__) # flask web application
 app.secret_key = 'BAD_SECRET_KEY' # Details on the Secret Key: https://flask.palletsprojects.com/en/2.3.x/config/#SECRET_KEY
 # NOTE: The secret key is used to cryptographically-sign the cookies used for storing the session data.
 
+# Passing image data! 
+UPLOAD_FOLDER = 'static/uploads' 
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 # 16 MB limit
+
+
 #DEFAULT ROUTE
 @app.route('/')
 def index():
@@ -143,22 +149,17 @@ def addPlantExtended():
     return render_template("addPlantExtended.html")
 
 
-# Passing image data! 
-# 1. accessing files
-UPLOAD_FOLDER = 'static/uploads' 
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 # 16 MB limit
 
-# 2. set up route for where data should be sent to - this is the route that will be called by the fetch() function in the script.js file
-@app.route("/postPlantFormFetch",methods = ['POST'])
-def postPlantFormFetch(): # 3. function associated with the route 
+# set up route for where data should be sent to - this is the route that will be called by the fetch() function in the script.js file
+@app.route("/postPlantFormFetch",methods = ['POST']) # default is GET, so we need to specify POST here
+def postPlantFormFetch(): # function associated with the route 
      #key is the same as in the form :)
     uploadedfile = request.files['the_file']
     #save file to uploads folder
-    filePath = os.path.join(app.config['UPLOAD_FOLDER'], uploadedfile.filename)
+    filePath = os.path.join(app.config['UPLOAD_FOLDER'], uploadedfile.filename) # where the file is saved 
     app.logger.info(filePath)
     uploadedfile.save(filePath)
-    app.logger.info(uploadedfile.filename)
+    app.logger.info(uploadedfile.filename) # form data is in request.files, not request.form - so we need to use request.files to get the file data
      # the textual data will be in request.form 
     app.logger.info(request.form)
     #return the file name + path

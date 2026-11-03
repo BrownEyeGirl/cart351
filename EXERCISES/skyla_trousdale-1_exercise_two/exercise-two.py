@@ -10,22 +10,29 @@ def index():
 
 #*************************************************
 #Task-1: GET REQUEST
-@app.route("/t1")
+@app.route("/t1", methods=['GET']) # default is GET, but I specified it here for readability and my own understanding. 
 def t1():
     return render_template("t1.html",have_results=False)
 #*************************************************
 @app.route("/getSearchCriteria")
 def getSearchCriteria():
-    #fill me in :
-    #replace the empty space to be url encoded
+    app.logger.info(request.args)
+    userInput = request.args['search_query'].replace(' ', '%20') # get users search query then replace the empty space to be url encoded
+    nasaAPI ="https://images-api.nasa.gov/search?q=" + userInput + "&media_type=image" # take api url and append the user input to it, then specify the media type to be image, so that we only get images back from the api
     
-    imgFromNasa = imgFromNasa.replace('https://images-api.nasa.gov/search', '%20')
+    data = requests.get(nasaAPI).json() # make the request to the api using the url i just created, then get the response as json
+
+    imgFromNasa = data['collection']['items'][0]['links'][0]['href'] # get the first image from the results, and get the href link to it
+    description = data['collection']['items'][0]['data'][0]['description'] # get the description of the first image from the results
+    print(description) # log the description to the console for debugging purposes
     return render_template("t1.html",
                                  have_results = True,
                                  description=description,
                                  imgPath = imgFromNasa           
                              )
     pass
+
+
 
 #*************************************************
 # #Task-2: GET REQUEST

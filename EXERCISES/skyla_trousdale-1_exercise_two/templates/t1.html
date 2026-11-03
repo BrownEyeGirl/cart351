@@ -1,0 +1,28 @@
+<!-- page will be a child of base.html -->
+{% extends "base.html" %}
+{% block content %}
+
+<section class = "inputData">
+    <form  action="{{url_for('getSearchCriteria')}}">
+    <h3>Input Form </h3>
+        <fieldset> 
+        <p>
+            <label>Input</label>
+            <input type="text" size="24" maxlength="40" name="search_query" required> 
+        </p>
+            <label></label>
+            <input id="submitBtn" type = "submit" name="submit"/>
+        </p>
+        </fieldset>
+    </form>
+</section>
+
+{% if have_results %}
+    <section class = "results">
+        <h3>Results</h3>
+        <p> Description: {{description}}</p>
+        <img src="{{imgPath}}" alt="NASA Image" />
+    </section>
+{% endif %}
+
+{% endblock %}

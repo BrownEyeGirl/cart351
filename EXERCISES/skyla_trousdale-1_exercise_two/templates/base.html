@@ -19,20 +19,7 @@
                 </nav>
         </header>
         <main>
-        <section class = "inputData">
-        <form id = "insertForm"  action="{{url_for('t1')}}">
-        <h3>Input Form </h3>
-        <fieldset> 
-        <p>
-            <label>Input</label>
-            <input type="text" size="24" maxlength="40" name="o_name" required> 
-        </p>
-            <label></label>
-            <input id="submitBtn" type = "submit" name="submit"/>
-        </p>
-        </fieldset>
-        </form>
-        </section>
+        
         {% block content %}{% endblock %}
         </main>
         <footer>
