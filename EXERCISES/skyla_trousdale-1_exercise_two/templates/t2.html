@@ -4,14 +4,12 @@
 
 <section class = "inputData">
     <form  action="{{url_for('getSearchCriteria_adv')}}">
-    <h3>Input Form </h3>
+    <h3>NASA API SEARCH CRITERIA</h3>
         <fieldset> 
         <p>
-            <label>Input</label>
-            <input type="text" size="24" maxlength="40" name="search_query" required> 
+            <input type="text" size="24" maxlength="40" name="search_query" placeholder="search for..." required> 
         </p>
-            <label></label>
-            <input id="submitBtn" type = "submit" name="submit"/>
+            <input id="submitBtn" type = "submit" name="submit" style="margin: 10px" />
         </p>
         </fieldset>
     </form>

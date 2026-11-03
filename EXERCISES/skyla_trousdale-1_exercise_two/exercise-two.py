@@ -20,7 +20,7 @@ def getSearchCriteria():
     user_input = request.args['search_query'].replace(' ', '%20') # get users search query then replace the empty space to be url encoded
     nasa_API ="https://images-api.nasa.gov/search?q=" + user_input + "&media_type=image" # take api url and append the user input to it, then specify the media type to be image, so that we only get images back from the api
     
-    data = requests.get(nasaAPI).json() # make the request to the api using the url i just created, then get the response as json
+    data = requests.get(nasa_API).json() # make the request to the api using the url i just created, then get the response as json
 
     imgFromNasa = data['collection']['items'][0]['links'][0]['href'] # get the first image from the results, and get the href link to it
     description = data['collection']['items'][0]['data'][0]['description'] # get the description of the first image from the results

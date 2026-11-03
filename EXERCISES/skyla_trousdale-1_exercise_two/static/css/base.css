@@ -5,18 +5,24 @@
 
 body{
     font-family: "Roboto", sans-serif;
-   
+    background-color: rgb(27, 36, 80); 
 }
 h2{
-
     font-size:32px;
     padding:5px;
-    background-color:rgb(14, 181, 232);
+    background-color:rgb(0, 0, 0);
     color: rgb(255,255,255);
+    font-family: "Jersey 25", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 nav{
     padding-bottom:5px;
-    background-color:rgb(14, 181, 232);
+    background-color:rgb(23, 25, 64);
+    padding: 15px; 
+    font-family: "Jersey 25", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 nav ul{
     display:flex;
@@ -38,15 +44,15 @@ color:rgb(255, 255, 255);
 
 main{
     margin: 10px;
-     background-color: rgb(229, 236, 245);
+     background-color: rgb(0, 0, 0);
      min-height:calc(82vh);
 }
 
 footer{
-     background-color:rgb(14, 181, 232);
-       min-height:5vh;
-       padding:5px;
-       color: rgb(255,255,255);
+    background-color:rgb(0, 0, 0);
+    min-height:5vh;
+    padding:5px;
+    color: rgb(255,255,255);
 
 }
 
@@ -63,4 +69,28 @@ footer{
     width: 100%;
     height: 200px;
     object-fit: cover;   /* crops images so they all fit the same size */
+}
+
+p {
+    color: white;
+    font-family: "Jersey 25", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    padding: 10px; 
+}
+
+h3 {
+    font-family: "Jersey 25", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: white; 
+    padding: 15px; 
+}
+
+input {
+    font-family: "Jersey 25", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: rgb(0, 0, 0); 
+    padding: 15px; 
 }
