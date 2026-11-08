@@ -112,6 +112,12 @@ h3 {
     font-size: 1.6rem;
     color: #000000; 
 }
+h4 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    filter: blur(1px); 
+    font-size: 1.2rem;
+    color: #0000ed; 
+}
 
 p {
   color: rgb(190, 190, 190); 
