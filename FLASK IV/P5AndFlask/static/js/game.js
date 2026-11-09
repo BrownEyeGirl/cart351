@@ -66,6 +66,12 @@ function draw() {
     displayInfo(label+nameToSave, width / 2, height / 2 + 20);
   }
   
+   /*** gameState - after save name save the score */
+  if(gameState === "saveData"){
+     displayInfo(`Saving ${nameToSave}'s score of ${score}...`, width / 2, height / 2 + 20);
+     sendData({ id:nameToSave, score: score });
+ }
+  
   /*** once received notification from server that data is saved we can end */
   if (gameState === "end") {
    
@@ -173,7 +179,7 @@ function keyPressed(e) {
 
     //user finished
     else if(e.keyCode ===13){
-      gameState = "end"
+      gameState = "saveData"
     }
    
   }
@@ -187,4 +193,21 @@ function keyPressed(e) {
   console.log(e);
   keyCode = e.keyCode;
   
+}
+
+/* function to send data to server */
+async function sendData(params) {
+  const queryParams = new URLSearchParams(params).toString();
+  console.log(queryParams);
+  //build the url -end point
+  const url = `/getDataFromP5?${queryParams}`;
+  try {
+    let res = await fetch(url);
+    let resJSON = await res.json();
+    console.log(resJSON);
+    gameState = 'end'
+   
+  } catch (err) {
+    console.log(err);
+  }
 }
