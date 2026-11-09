@@ -12,4 +12,14 @@ def index():
 def runpP5():
     return render_template("p5_BreakOut.html")
 
+
+# for the get from p5
+@app.route('/getDataFromP5')
+def getDataFromP5():
+    #give back request.args
+    app.logger.info(request.args["id"])
+    app.logger.info(request.args["score"])
+    return({"inFile":"false"}) 
+
+
 app.run(debug = True)
