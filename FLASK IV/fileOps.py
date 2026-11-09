@@ -49,3 +49,15 @@ for i in range(3):
 sampleFile.writelines(colorList) 
 sampleFile.close() 
 print("Data is written into the file.") 
+
+
+""" APPENDING A TEXT FILE """
+
+sampleFile_a = open("files/sample_text.txt", "a") # the ONLY difference is you open it for appending rather than writing. if opened with "w", it would rewrite what already exists. 
+nameList = [] 
+for i in range(3): # repeats 3x, [0,1,2]
+    a_name = input("Enter the name of someone in your class: ") 
+    nameList.append(a_name + '\n') 
+sampleFile_a.writelines(nameList) 
+sampleFile_a.close() 
+print("Data is written into the file.") 
