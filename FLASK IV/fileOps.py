@@ -69,18 +69,46 @@ import json
 # Read from file and parse JSON (first method)
 jsonFile = open("files/test.json", "r") # read mode 
 data = json.load(jsonFile)
-print(data)
-print(type(data)) # a list
+# print(data)
+# print(type(data)) # a list
 
 # Parse JSON info & turn it into a python object (dictionary) (second method)
 json_str = '{"name":"Sabs", "fav_col":"red", "fav_city":"montreal"}'
 data_2 = json.loads(json_str) 
-print(data_2)
-print(type(data_2))#converts to a dict
+# print(data_2)
+# print(type(data_2))#converts to a dict
 
 # Read JSON file & turn it into python object
 jsonFile = open("files/test.json", "r")
 out_all_as_string = jsonFile.read()
-data_3 = json.loads(out_all_as_string) 
-print(data_3)
-print(type(data_3[0]))
+data_3 = json.loads(out_all_as_string)  # load s => load string
+# print(data_3)
+# print(type(data_3[0]))
+
+
+
+""" WRITING JSON """
+# Using json.dumps() to turn python dict into json obj, then write it into the file 
+data_toSave = {"name":"mandy", "fav_col":"blue", "fav_city":"winnipeg"}
+jsonStr = json.dumps(data_toSave, indent=4) # converts python dictionary to json str 
+fileOpen = open("files/new_sample.json","w") #open or create if non existent
+fileOpen.write(jsonStr) 
+print(fileOpen)
+
+# using json.dumps() to combine the json obj & json file in one line  
+jsonFile = open("files/new_sample_b.json", "w")
+data_toSave_2= {"name":"mandy", "fav_col":"blue", "fav_city":["list",3,4,True,"abc"]}
+json.dump(data_toSave_2, jsonFile, indent =4) # takes data_toSave_2 and adds it to the json file 
+
+# Appending (a better way than just appending )
+# 1. read in the entire contents of the file
+# 2. append to the JSON object in python
+# 3. write out the entire JSON object (overwrite the file)
+jsonFile = open("files/new_sample_b.json", "r+")
+data = json.load(jsonFile)
+print(data['fav_city'])
+print(type(data['fav_city']))
+jsonFile.seek(0) # go to beginning of file
+data['fav_city'].append("another element")
+data["newKey"] = 1234 # output to the file
+json.dump(data,jsonFile, indent =4)
