@@ -57,6 +57,10 @@ function setup() {
 
 
 function draw() {
+    /*** gameState - save the name */
+  if (gameState === "saveName") {
+    displayInfo(label+nameToSave, width / 2, height / 2 + 20);
+  }
   //default
   background("#333333");
 
