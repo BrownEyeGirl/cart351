@@ -35,29 +35,52 @@ sampleFile = open("files/sample_text_rev.txt", "w") # modes: "w" is write-only m
 
 # Ask for user input 3 times, adds it as a line to the file 
 for i in range(3): 
-    a_name = input("Enter the name of the animal: ") # get user input 
-    sampleFile.write(a_name) # write input in file 
+    # a_name = input("Enter the name of the animal: ") # get user input 
+    # sampleFile.write(a_name) # write input in file 
     sampleFile.write("\n") # enter to next line 
 #sampleFile.close() # safer to close it, conserves resources. although lines written immediately even without closing
-print("Data is written into the file.") 
+# print("Data is written into the file.") 
 
 # Ask for colours 
 colorList = [] 
-for i in range(3): 
-    a_name = input("Enter the name of a color: ") 
-    colorList.append(a_name + '\n') 
-sampleFile.writelines(colorList) 
+# for i in range(3): 
+    # a_name = input("Enter the name of a color: ") 
+    # colorList.append(a_name + '\n') 
+#sampleFile.writelines(colorList) 
 sampleFile.close() 
-print("Data is written into the file.") 
+# print("Data is written into the file.") 
 
 
 """ APPENDING A TEXT FILE """
 
 sampleFile_a = open("files/sample_text.txt", "a") # the ONLY difference is you open it for appending rather than writing. if opened with "w", it would rewrite what already exists. 
 nameList = [] 
-for i in range(3): # repeats 3x, [0,1,2]
-    a_name = input("Enter the name of someone in your class: ") 
-    nameList.append(a_name + '\n') 
-sampleFile_a.writelines(nameList) 
+# for i in range(3): # repeats 3x, [0,1,2]
+    # a_name = input("Enter the name of someone in your class: ") 
+   # nameList.append(a_name + '\n') 
+# sampleFile_a.writelines(nameList) 
 sampleFile_a.close() 
-print("Data is written into the file.") 
+# print("Data is written into the file.") 
+
+
+""" READING A JSON FILE """
+import json
+
+# Read from file and parse JSON (first method)
+jsonFile = open("files/test.json", "r") # read mode 
+data = json.load(jsonFile)
+print(data)
+print(type(data)) # a list
+
+# Parse JSON info & turn it into a python object (dictionary) (second method)
+json_str = '{"name":"Sabs", "fav_col":"red", "fav_city":"montreal"}'
+data_2 = json.loads(json_str) 
+print(data_2)
+print(type(data_2))#converts to a dict
+
+# Read JSON file & turn it into python object
+jsonFile = open("files/test.json", "r")
+out_all_as_string = jsonFile.read()
+data_3 = json.loads(out_all_as_string) 
+print(data_3)
+print(type(data_3[0]))
