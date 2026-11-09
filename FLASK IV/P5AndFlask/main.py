@@ -1,3 +1,5 @@
+import os
+import json
 
 from flask import Flask,render_template,request
 app = Flask(__name__) # basic flask app 
@@ -19,7 +21,15 @@ def getDataFromP5():
     #give back request.args
     app.logger.info(request.args["id"])
     app.logger.info(request.args["score"])
-    return({"inFile":"false"}) 
+    
+    # Check if the file exists (can be a file or directory)
+    filePath="filesForP5/p5Data.json"
+    if os.path.exists(filePath):
+        app.logger.info("file exists")
+    else:
+        app.logger.info("file not exists")
+
+    return({"inFile":"false"})
 
 
 app.run(debug = True)
