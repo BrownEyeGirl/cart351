@@ -104,7 +104,7 @@ json.dump(data_toSave_2, jsonFile, indent =4) # takes data_toSave_2 and adds it 
 # 1. read in the entire contents of the file
 # 2. append to the JSON object in python
 # 3. write out the entire JSON object (overwrite the file)
-jsonFile = open("files/new_sample_b.json", "r+")
+jsonFile = open("files/new_sample_b.json", "r+") # read-write mode
 data = json.load(jsonFile)
 print(data['fav_city'])
 print(type(data['fav_city']))
