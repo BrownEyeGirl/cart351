@@ -22,12 +22,20 @@ def getDataFromP5():
     app.logger.info(request.args["id"])
     app.logger.info(request.args["score"])
     
-    # Check if the file exists (can be a file or directory)
+      # Check if the file exists (can be a file or directory)
     filePath="filesForP5/p5Data.json"
     if os.path.exists(filePath):
         app.logger.info("file exists")
+        jsonFile = open(filePath, "r+")
+        theList = json.load(jsonFile)
     else:
         app.logger.info("file not exists")
+        #open file for writing
+        jsonFile = open(filePath, "w")
+        list_m = [request.args]
+        json.dump(list_m, jsonFile, indent =4)
+        jsonFile.close()
+
 
     return({"inFile":"false"})
 
