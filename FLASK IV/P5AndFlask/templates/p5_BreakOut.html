@@ -1,0 +1,19 @@
+ 
+<!-- will be a child of base-->
+{% extends "base.html" %}
+
+<!-- js for this page-->
+{% block scriptblock %}
+
+<script src="{{url_for('static',filename='js/libraries/p5.min.js')}}"></script>
+<script src="{{url_for('static',filename='js/libraries/p5.sound.min.js')}}"></script>
+<script src="{{url_for('static',filename='js/Brick.js')}}"></script>
+<script src="{{url_for('static',filename='js/Ball.js')}}"></script>
+<script src="{{url_for('static',filename='js/Paddle.js')}}"></script>
+<script src="{{url_for('static',filename='js/game.js')}}"></script>
+
+
+{% endblock %}
+
+{% block content %}
+{% endblock %}
