@@ -73,7 +73,17 @@ function draw() {
  }
   
   /*** once received notification from server that data is saved we can end */
-  if (gameState === "end") {
+    if (gameState === "end") {
+    //if we got data back - then this should be a new score
+    if(oldScore!=""){
+       displayInfo(`${nameToSave}'s OLD score was ${oldScore}.`, width / 2, height / 2-20);
+       displayInfo(`Now Saved ${nameToSave}'s score of ${score}.`, width / 2, height / 2 + 20);
+       }
+
+    else {
+       displayInfo(`Saved ${nameToSave}'s score of ${score}.`, width / 2, height / 2 + 20);
+
+    }
    
     displayInfo(`BYE!\n`, width / 2, height / 2 + 60);
   }
@@ -206,6 +216,10 @@ async function sendData(params) {
     let resJSON = await res.json();
     console.log(resJSON);
     gameState = 'end'
+
+    if(resJSON.score!==undefined){
+      oldScore = resJSON.score
+    }
    
   } catch (err) {
     console.log(err);
