@@ -57,13 +57,15 @@ function setup() {
 
 
 function draw() {
-    /*** gameState - save the name */
-  if (gameState === "saveName") {
-    displayInfo(label+nameToSave, width / 2, height / 2 + 20);
-  }
+  
   //default
   background("#333333");
 
+  /*** gameState - save the name */
+  if (gameState === "saveName") {
+    displayInfo(label+nameToSave, width / 2, height / 2 + 20);
+  }
+  
   /*** once received notification from server that data is saved we can end */
   if (gameState === "end") {
    
@@ -82,7 +84,7 @@ function draw() {
       height / 2 + 20
     );
     //check if space or q
-    if (keyIsPressed) {
+    if (keyPressed) {
       //play again
       if (keyCode === 32) {
         gameState = "play";
@@ -91,9 +93,9 @@ function draw() {
         document.querySelector("#p5Score").innerHTML = `SCORE: ${score}`
         ball.reset();
       }
-      //end
+      // save name
       if (keyCode === 81) {
-        gameState = "end";
+        gameState = "saveName";
       }
     }
   }
@@ -155,7 +157,33 @@ function displayBricks() {
 }
 //check key press
 function keyPressed(e) {
-  // console.log("key");
+  // save user name
+  if (gameState === "saveName") {
+    //check if is lower /uppercase letter
+    if (
+      (e.keyCode >= 65 && e.keyCode <= 90) ||
+      (e.keyCode >= 97 && e.keyCode <= 122)
+    ){
+         nameToSave += key;
+
+    }
+    if (keyCode === 81) {
+        gameState = "saveName";
+    } 
+
+    //user finished
+    else if(e.keyCode ===13){
+      gameState = "end"
+    }
+   
+  }
+
+  /*** once received notification from server that data is saved we can end */
+  if (gameState === "end") {
+    console.log(nameToSave);
+    displayInfo(`BYE!\n`, width / 2, height / 2 + 60);
+  }
+
   console.log(e);
   keyCode = e.keyCode;
   
