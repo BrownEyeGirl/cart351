@@ -1,0 +1,49 @@
+*{
+    margin:0;
+     padding:0;
+}
+
+body{
+    font-family: "Roboto", sans-serif;
+    background-color: rgb(255, 255, 255); 
+}
+h2{
+    font-size:32px;
+    padding:5px;
+    background-color:rgb(0, 0, 0);
+    color: rgb(255,255,255);
+    font-family: "Jersey 25", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+main{
+    margin: 10px;
+     background-color: rgb(255, 255, 255);
+     min-height:calc(82vh);
+}
+
+p {
+    color: rgb(0, 0, 0);
+    font-family: "Jersey 25", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    padding: 10px; 
+}
+
+h3 {
+    font-family: "Jersey 25", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: rgb(0, 0, 0); 
+    padding: 15px; 
+}
+
+input {
+    font-family: "Jersey 25", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: rgb(0, 0, 0); 
+    padding: 15px; 
+}
