@@ -40,10 +40,91 @@ h3 {
     padding: 15px; 
 }
 
-input {
-    font-family: "Jersey 25", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    color: rgb(0, 0, 0); 
+
+/* Buttons */
+.right-container {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 300px;
+    padding: 15px;
+}
+
+/* 2 columns, 3 rows */
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.button-grid button {
+    padding: 20px;
+    cursor: pointer;
+    background-color: #ffffff; 
+    border: 1px solid #d2d2d2;
+    border-radius: 6px;
+    font-size: 0.6em;
+    font-family: "Courier New", Courier, monospace;
+
+}
+
+button:hover {
+    background-color: blue; 
+}
+
+#exitBtn {
+    color: white; 
+    background-color: rgb(91, 32, 251); 
+}
+
+/* side by side divs */ 
+.parent-container {
+  display: flex;       /* Aligns children horizontally */
+  gap: 10px;           /* Adds a clean space between the two divs */
+  align-items: center; /* Centers vertically */
+  height: 100vh;       /* Parent needs a defined height */
+  padding-right: 10%;   
+}
+
+.left-box {
+  flex: 1;             /* Tells both boxes to take up equal width */
+  padding: 100px;
+} 
+.right-box {
+  flex: 0.5;             /* Tells both boxes to take up equal width */
+  padding: 10px;
+  border: 1px solid #d2d2d2;
+  border-radius: 6px;
+}
+
+.info-box {
+    background-color: rgb(255, 255, 255); 
+    border: 1px solid #d2d2d2;
+    border-radius: 6px;
     padding: 15px; 
+    margin-bottom: 10px; /* gap between info and buttons */ 
+}
+
+/* Output */ 
+#output {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.8em;
+  line-height: 1.4;
+}
+
+/* output footer */ 
+.fixed-footer {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto; /* or a specific max-width/width like 100% */
+  max-width: 600px;
+  background-color: #ffffff;
+  color: rgb(255, 0, 0);
+  text-align: center;
+  padding: 10px 20px;
+  z-index: 1000;
 }

@@ -2,16 +2,57 @@
 {% extends "base.html" %}
 {% block title %}Mini Tracker{% endblock %}
 {% block content %}
+
+
+    <div class="parent-container">
+            <div class="left-box">
+                <!-- GLTF files loaded here -->
+            </div>
+            <div class="right-box">
+            <div class="info-box">
+                <h1 id="output">click a button</h1>
+            </div>
+            <div class="button-grid">
+                <button
+                    data-text="You have {disk_free_gb} GB of space left out of {disk_total_gb} GB."
+                    data-footer="Disk space is what's left for everything you haven't saved yet.">File</button>
+
+                <button
+                    data-text="You first visited on {first_visit}."
+                    data-footer="Cake: because every visit gets remembered.">Cake</button>
+
+                <button
+                    data-text="You have {ram_free_gb} GB of RAM free out of {ram_total_gb} GB."
+                    data-footer="RAM is the memory this page is using right now.">Cookie</button>
+
+                <button
+                    data-text="You have clicked {clicks} times and left this tab {tab_leaves} times."
+                    data-footer="Every click and every tab leave is being counted.">ADHD Pill</button>
+                
+                <button
+                    data-text="[insert airplane info]"
+                    data-footer="[airplane bottowm text]">Airplane</button>
+
+                <button
+                    id="exitBtn"
+                    data-text="Make a selection: "
+                    data-footer="">Exit</button>
+            </div>
+            </div>
+     </div>
+    <footer class="fixed-footer" id="footer">Click a button</footer>
+<!--     
     <p>Available Storage (GB): <span id="disk_free"> {{ info.disk_free }} </span>GB / <span id="disk_total"> {{ info.disk_total_gb }} </span> GB </p>
     <p>Available Ram (GB): <span id="ram_free"> {{ info.ram_free }} </span>GB / <span id="ram_total"> {{ info.ram_total_gb }} </span> GB </p>
     <p>Clicks: <span id="clicks">{{ info.clicks }}</span></p>
-    <p>Tab leaves: <span id="tab_leaves">{{ info.tab_leaves }}</span></p>
+    <p>Tab leaves: <span id="tab_leaves">{{ info.tab_leaves }}</span></p> -->
 
    <div id="location-section">
     <button id="btnLoc">Add approximate location</button>
     <div id="location-results"></div>
 </div>
     <script> 
+
     // send an event to flask, show updated totals
     async function log(event) {
     let res = await fetch("/log", {
@@ -21,28 +62,43 @@
         keepalive: true
     });
 
-    let info = await res.json();
-    document.getElementById("clicks").textContent = info.clicks;
-    document.getElementById("tab_leaves").textContent = info.tab_leaves;
-    document.getElementById("disk_free").textContent = info.disk_free_gb;
-    document.getElementById("disk_total").textContent = info.disk_total_gb;
-    document.getElementById("ram_free").textContent = info.ram_free_gb;
-    document.getElementById("ram_total").textContent = info.ram_total_gb;
-
+    // let info = await res.json();
+    // document.getElementById("clicks").textContent = info.clicks;
+    // document.getElementById("tab_leaves").textContent = info.tab_leaves;
+    // document.getElementById("disk_free").textContent = info.disk_free_gb;
+    // document.getElementById("disk_total").textContent = info.disk_total_gb;
+    // document.getElementById("ram_free").textContent = info.ram_free_gb;
+    // document.getElementById("ram_total").textContent = info.ram_total_gb;
     }
 
-    // count clicks
+     // count clicks
     addEventListener("click", () => log("clicks"));
 
-    // count tab leaves
-    document.addEventListener("visibilitychange", () => {
-    if (document.hidden) log("tab_leaves");
+     // count tab leaves
+     document.addEventListener("visibilitychange", () => {
+     if (document.hidden) log("tab_leaves");
     });
 
 
-// ---------- IPWho.is Location Lookup ----------
+   /*document.getElementById("showBtn").addEventListener("click", function() {
+     // Replaces existing content with new HTML
+     document.getElementById("output").innerHTML = "<h2>Hello!  {{ info.ram_free_gb }}</h2><p>This HTML appeared on click.</p>";
+   });*/
 
-document.getElementById("btnLoc").addEventListener("click", async (event) => {
+   // swap {key} placeholders with values from the info object
+    const fill = (template, info) =>
+    template.replace(/\{(\w+)\}/g, (_, key) => info[key] ?? "?");
+
+    document.querySelectorAll("button[data-text]").forEach(btn => {
+    btn.addEventListener("click", async () => {
+        const info = await (await fetch("/info")).json();
+        document.getElementById("output").textContent = fill(btn.dataset.text, info);
+        document.getElementById("footer").textContent = fill(btn.dataset.footer || "", info);
+    });
+    });
+/* IPWho.is Location Lookup */
+
+/*document.getElementById("btnLoc").addEventListener("click", async (event) => {
 
      try {
     // 1. Pauses here until the network request finishes
@@ -55,7 +111,7 @@ document.getElementById("btnLoc").addEventListener("click", async (event) => {
     // 3. Catches network or parsing errors cleanly
     console.error('Failed to load data:', error);
   }
- });
+ });*/ 
 
 
     </script>
