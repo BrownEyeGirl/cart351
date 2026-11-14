@@ -3,4 +3,18 @@
 {% block title %}Mini Tracker{% endblock %}
 {% block content %}
     <p>Available GB: {{ disk_free }} GB</p>
+    <p>Clicks: <span id="clicks"> {{ clicks }}</span></p>
+
+    <script> 
+    // count clicks 
+    async function click() {
+        let res = await fetch("/click");
+        let resJSON = await res.json();
+        document.getElementById("clicks").textContent = resJSON.clicks;
+    }
+
+    addEventListener("click", click);
+    click();  // runs once on load, so the saved total shows (counts as a click)
+
+    </script>
 {% endblock %}
