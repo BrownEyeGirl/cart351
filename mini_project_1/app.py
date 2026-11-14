@@ -1,70 +1,49 @@
 import os, shutil, psutil
-from flask import Flask, render_template, jsonify, request, make_response
-import json
+from flask import Flask, render_template, jsonify, request, session
 from datetime import datetime
 
 app = Flask(__name__)
 
-DATA_FILE = "userinfo.json"
+# needed to sign the session cookie ( uses a placeholder like this for testing)
+app.secret_key = 'BAD_SECRET_KEY'
 
-# read saved info, then put live system stats on top
+# build the info dictionary: this visitor's session values + live system stats
 def read():
-    info = {"clicks": 0, "tab_leaves": 0}
+    info = {
+        "clicks": session.get("clicks", 0),
+        "tab_leaves": session.get("tab_leaves", 0),
+        "first_visit": session.get("first_visit"),
+    }
 
-    try:
-        with open(DATA_FILE) as f:
-            info.update(json.load(f))
-    except (FileNotFoundError, ValueError, TypeError):
-        pass
-
-    # live stats always win over saved ones
+    # live stats are not saved, they are measured fresh each time
     info.update({
-        "ram_free_gb": round(psutil.virtual_memory().available / 1e9, 1),
-        "ram_total_gb": round(psutil.virtual_memory().total / 1e9, 1),
+        "ram_free_gb": round(psutil.virtual_memory().available / 1e9, 1), # turns into gb and rounds to nearest 10th 
+        "ram_total_gb": round(psutil.virtual_memory().total / 1e9, 1), # ''
         "disk_free_gb": round(shutil.disk_usage(os.path.expanduser("~")).free / 1e9, 1),
         "disk_total_gb": round(shutil.disk_usage(os.path.expanduser("~")).total / 1e9, 1),
     })
     return info
 
-# write info to json file
-def save(info):
-    with open(DATA_FILE, "w") as f:
-        json.dump(info, f)
-
 @app.route("/")
 def index():
-    info = read()
-    now = datetime.now().isoformat(timespec="seconds")
-    cookie = request.cookies.get("tv_first")
+    # first visit from THIS browser, only saved once
+    if "first_visit" not in session:
+        session["first_visit"] = datetime.now().isoformat(timespec="seconds")
+    return render_template("index.html", info=read())
 
-    # first visit to the whole site, only saved once
-    if "first_visit" not in info:
-        info["first_visit"] = now
-
-    # new browser: add to the list of visitors
-    if not cookie:
-        info.setdefault("visits", []).append(now)
-    save(info)
-
-    resp = make_response(render_template("index.html", info=info, my_first=cookie or now))
-    if not cookie:
-        resp.set_cookie("tv_first", now, max_age=60 * 60 * 24 * 365)  # remember this browser for a year
-    return resp
-
-# add one to an event (clicks or tab_leaves), save, return totals
+# add one to an event (clicks or tab_leaves), store in the session, return totals
 @app.route("/log", methods=["POST"])
 def log():
     event = (request.get_json(silent=True) or {}).get("event")
-    info = read()
     if event in ("clicks", "tab_leaves"):  # ignore anything else
-        info[event] += 1
-        save(info)
-    return jsonify(info)
+        session[event] = session.get(event, 0) + 1
+    return jsonify(read())
 
-# simply reads the data and returns it 
+# read-only route for the buttons (does not count as a click)
 @app.route("/info")
 def info_route():
     return jsonify(read())
 
+print(app.secret_key)
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=5000) # change port if page is not loading. sometimes it glitches. 
