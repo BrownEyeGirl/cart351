@@ -2,19 +2,38 @@
 {% extends "base.html" %}
 {% block title %}Mini Tracker{% endblock %}
 {% block content %}
-    <p>Available GB: {{ disk_free }} GB</p>
-    <p>Clicks: <span id="clicks"> {{ clicks }}</span></p>
+    <p>Available Storage (GB): <span id="disk_free"> {{ info.disk_free }} </span>GB / <span id="disk_total"> {{ info.disk_total_gb }} </span> GB </p>
+    <p>Available Ram (GB): <span id="ram_free"> {{ info.ram_free }} </span>GB / <span id="ram_total"> {{ info.ram_total_gb }} </span> GB </p>
+    <p>Clicks: <span id="clicks">{{ info.clicks }}</span></p>
+    <p>Tab leaves: <span id="tab_leaves">{{ info.tab_leaves }}</span></p>
 
     <script> 
-    // count clicks 
-    async function click() {
-        let res = await fetch("/click");
-        let resJSON = await res.json();
-        document.getElementById("clicks").textContent = resJSON.clicks;
+    // send an event to flask, show updated totals
+    async function log(event) {
+    let res = await fetch("/log", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ event: event }),
+        keepalive: true
+    });
+
+    let info = await res.json();
+    document.getElementById("clicks").textContent = info.clicks;
+    document.getElementById("tab_leaves").textContent = info.tab_leaves;
+    document.getElementById("disk_free").textContent = info.disk_free_gb;
+    document.getElementById("disk_total").textContent = info.disk_total_gb;
+    document.getElementById("ram_free").textContent = info.ram_free_gb;
+    document.getElementById("ram_total").textContent = info.ram_total_gb;
+
     }
 
-    addEventListener("click", click);
-    click();  // runs once on load, so the saved total shows (counts as a click)
+    // count clicks
+    addEventListener("click", () => log("clicks"));
 
+    // count tab leaves
+    document.addEventListener("visibilitychange", () => {
+    if (document.hidden) log("tab_leaves");
+    });
+    
     </script>
 {% endblock %}
