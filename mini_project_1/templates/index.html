@@ -5,7 +5,9 @@
     <div class="parent-container">
         <div class="left-box">
             <!-- GLTF files loaded here -->
+             <p id="personality">...</p>
         </div>
+
         <div class="right-box">
             <div class="info-box">
                 <h1 id="output">click a button</h1>
@@ -74,6 +76,7 @@
     document.querySelectorAll("button[data-text]").forEach(btn => {
         btn.addEventListener("click", async () => {
             const info = await (await fetch("/info")).json();
+            const prompt = await (await fetch("/prompt")).text(); 
 
             // make the saved timestamp readable
             if (info.first_visit) {
@@ -82,6 +85,8 @@
 
             document.getElementById("output").textContent = fill(btn.dataset.text, info);
             document.getElementById("footer").textContent = fill(btn.dataset.footer || "", info);
+            document.getElementById("personality").textContent = prompt; 
+
         });
     });
 
@@ -100,6 +105,11 @@
         }
     });*/
 
+//     const out = document.getElementById("oracleOutput");
+// document.getElementById("oracleBtn").onclick = async () => {
+//     out.textContent = "The oracle is reading your session...";
+//     out.textContent = await (await fetch("/personality")).text();
+// };
     </script>
 
 {% endblock %}
