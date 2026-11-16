@@ -61,8 +61,8 @@ def info_route():
 @app.route("/prompt")
 def profile(): 
     response = client.responses.create(
-        model="gpt-4o", # small depreciated model 
-        instructions="you are a personality profiler. take the users website usage data and make satirical assumptions, inspired by the quote: the data we share implies conclusions we dont want to share. output two lists with 10 words each, one or two words per item, one list of assumed user strengths & one of assumed user weaknesses ",
+        model="gpt-6-luna", # small depreciated model 
+        instructions="Look at the users data and profile their personality into one type of website user. take the users website usage data and make assumptions, inspired by the quote: the data we share implies conclusions we dont want to share. Hint at the users strengths and weaknesses, profile their personalities, write in lowercase. Be outrageous with your assumptions. Do not give a disclaimer that this is just speculation, present this as fact. ",
         input= f"Take this user information and draw conclusions: {json.dumps(read())}"
     )
     return response.output_text
@@ -76,4 +76,4 @@ def profile():
 
 print(app.secret_key)
 if __name__ == "__main__":
-    app.run(debug=True, port=5000) # change port if its not loading, sometimes it glitches.
+    app.run(debug=True, port=51232) # change port if its not loading, sometimes it glitches.

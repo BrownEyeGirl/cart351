@@ -10,6 +10,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Jersey+25&display=swap" rel="stylesheet">
     <title>{% block title %}CART 351 EX TWO{% endblock %}</title>
 
+      <!-- Lets the script import three.js straight from a CDN, no install needed -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
     </head>
     <body>
         {% block content %}{% endblock %}

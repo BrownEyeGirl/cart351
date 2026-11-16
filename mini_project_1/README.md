@@ -2,3 +2,6 @@
 ## Mini Project 1 
 
 
+
+# Running in terminal (my personal notes)
+conda activate FlaskEnvProj
