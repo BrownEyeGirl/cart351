@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block title %}Mini Tracker{% endblock %}
+{% block content %}
+
+<header class="site-header">
+    <h1>are we sharing too much?</h1>
+    <h4 id="header-text">cookie vending machine</h4>
+
+</header>
+
+    <div class="parent-container">
+        <div class="left-box">
+            <!-- AI bot loaded here -->
+             <p id="header-text">what gbt-luna-6 thinks about you: </p>
+             <p id="personality"></p>
+        </div>
+        <div class="middle-box">
+            <!-- GLTF files loaded here -->
+            <script type="module" src="../static/main.js"></script>
+             <canvas id="scene"></canvas>
+        </div>
+        <div class="right-box">
+            <div class="info-box">
+                <h1 id="output">Make a selection: </h1>
+            </div>
+            <div class="button-grid">
+                <button
+                    data-text="Cost: {disk_free_gb} GB of space left out of {disk_total_gb} GB."
+                    data-footer="The size of the file has been be spiked to consume the rest of your disk space.">
+                  <img src="{{ url_for('static', filename='images/files.png') }}" alt="File" style="display: block;" />
+                </button>
+                <button
+                    data-text="Your first visit was {first_visit}."
+                    data-footer="We will never forget your first visit.">
+                <img src="{{ url_for('static', filename='images/birthday.png') }}" alt="Cake" style="display: block;" />
+                </button>
+
+                <button
+                    data-text="Cost: {ram_free_gb} GB of RAM free out of {ram_total_gb} GB."
+                    data-footer="We utilize your remaining RAM to slow down your computer.">
+                    <img src="{{ url_for('static', filename='images/cookies.png') }}" alt="Cookie" style="display: block;" />
+                </button>
+
+                <button
+                    data-text="You have clicked {clicks} times and left this tab {tab_leaves} times."
+                    data-footer="Every click and every tab leave is being counted.">
+                    <img src="{{ url_for('static', filename='images/pills.png') }}" alt="ADHD Meds" style="display: block;" />
+                </button>
+
+                <button
+                    data-text="Departing from {city}, {region} on {org}'s network."
+                    data-footer="Your network already told us where you are leaving from.">
+                    <img src="{{ url_for('static', filename='images/flights.png') }}" alt="Airplane" style="display: block;" />
+                </button>
+
+                <button
+                    id="exitBtn"
+                    data-text="Make a selection: "
+                    data-footer="">
+                <img src="{{ url_for('static', filename='images/exit.png') }}" alt="Exit" style="display: block;" />
+            </button>
+            </div>
+            <footer class="fixed-footer" id="footer"></footer>
+        </div>
+    </div>
+
+
+
+    <script>
+
+    // send an event to flask; flask adds one to this visitor's session counter
+    async function log(event) {
+        await fetch("/log", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ event: event }),
+            keepalive: true
+        });
+    }
+
+    // count clicks
+    addEventListener("click", () => log("clicks"));
+
+    // count tab leaves
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) log("tab_leaves");
+    });
+
+    // swap {key} placeholders with values from the info object
+    const fill = (template, info) =>
+        template.replace(/\{(\w+)\}/g, (_, key) => info[key] ?? "?");
+
+    // each button shows its own text, filled with fresh data from /info
+    document.querySelectorAll("button[data-text]").forEach(btn => {
+        btn.addEventListener("click", async () => {
+            const info = await (await fetch("/info")).json();
+
+            // make the saved timestamp readable
+            if (info.first_visit) {
+                info.first_visit = new Date(info.first_visit).toLocaleDateString();
+            }
+
+            document.getElementById("output").textContent = fill(btn.dataset.text, info);
+            document.getElementById("footer").textContent = fill(btn.dataset.footer || "", info);
+
+            document.getElementById("personality").textContent = "Loading user assumptions..."; 
+
+            // send prompt info 
+            const context = document.getElementById("output").textContent;
+            console.log("context: " + context)
+            const prompt = await (await fetch(`/prompt?context=${encodeURIComponent(context)}`)).text();
+            document.getElementById("personality").innerHTML = prompt; 
+
+        });
+    });
+
+    // Refresh the visitor's location and network details on every page load.
+    (async () => {
+        const d = await (await fetch("https://ipwho.is/")).json();
+        await fetch("/location", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                city: d.city,
+                region: d.region,
+                org: d.connection?.org
+            })
+        });
+    })();
+
+//     const out = document.getElementById("oracleOutput");
+// document.getElementById("oracleBtn").onclick = async () => {
+//     out.textContent = "The oracle is reading your session...";
+//     out.textContent = await (await fetch("/personality")).text();
+// };
+    </script>
+
+{% endblock %}

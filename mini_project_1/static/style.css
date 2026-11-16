@@ -1,0 +1,208 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #ffffff;
+  font-family: "Jersey 25", sans-serif;
+}
+
+#scene {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.parent-container {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) minmax(0, 2fr) minmax(260px, 1fr);
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  height: 50vh;
+  padding: 60px;
+}
+
+
+.left-box {
+  padding: 12px;
+  
+}
+
+.middle-box {
+  width: 90%;
+  min-width: 0;
+  height: min(66vh, 760px);
+  justify-self: center;
+  overflow: hidden;
+
+}
+
+.right-box {
+  width: 100%;
+  padding: 16px;
+  border-radius: 10px;
+}
+
+h2{
+    font-size:32px;
+    padding:5px;
+    background-color:rgb(0, 0, 0);
+    color: rgb(255,255,255);
+    font-family: "Jersey 25", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+main{
+    margin: 10px;
+    min-height:calc(30vh);
+}
+
+p {
+    color: rgb(92, 92, 92);
+    font-family: "Jersey 25", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    padding: 10px; 
+}
+
+h3 {
+    font-family: "Jersey 25", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: rgb(0, 0, 0); 
+    padding: 15px; 
+}
+
+
+/* two columns of buttons inside the right panel */
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    justify-content: center;
+    column-gap: 10px;
+    row-gap: 20px;
+}
+
+.button-grid button {
+    min-width: 0;
+    width: fit-content;
+    height: fit-content;
+    justify-self: center;
+    padding: 0;
+    overflow: hidden;
+    display: block;
+    border: none;
+    outline: none;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: "Jersey 25", sans-serif;
+    transition: transform 150ms ease;
+}
+
+.button-grid img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 66px;
+    object-fit: contain;
+    transform: scale(1.04); /* cuts off white boarders in the buttons */ 
+}
+
+.button-grid button:hover {
+    transform: scale(1.04);
+}
+
+
+.info-box {
+    background-color: rgb(255, 255, 255); 
+    border-radius: 6px;
+    padding: 15px; 
+    margin-bottom: 10px; /* gap between info and buttons */ 
+    background-image: url("images/display.png");
+    margin-inline: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 90%; 
+  opacity: 0.6
+}
+
+/* Output */ 
+#output {
+  font-family: "Jersey 25", sans-serif;
+  color: black; 
+  font-size: 0.8em;
+  line-height: 1.4;
+}
+
+/* output footer */ 
+.fixed-footer {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto; /* or a specific max-width/width like 100% */
+  max-width: 600px;
+  background-color: #ffffff;
+  color: rgb(255, 0, 0);
+  text-align: center;
+  padding: 10px 20px;
+  z-index: 1000;
+}
+
+@media (max-width: 800px) {
+  html, body {
+    height: auto;
+    min-height: 100%;
+    overflow: auto;
+  }
+
+  .parent-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(240px, 40vh) auto;
+    height: auto;
+    min-height: 100vh;
+    padding: 12px;
+  }
+
+  .middle-box {
+    height: 40vh;
+  }
+
+  .left-box {
+    padding: 4px;
+  }
+
+  .right-box {
+    max-width: 520px;
+    justify-self: center;
+  }
+
+  .fixed-footer {
+    position: static;
+    transform: none;
+    max-width: none;
+  }
+}
+
+
+#header-text {
+  color: rgb(184, 184, 184); 
+  font-family: "Jersey 25", sans-serif;
+}
+
+.site-header {
+  padding: 50px; 
+  text-align: center
+}
