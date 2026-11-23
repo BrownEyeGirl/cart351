@@ -150,7 +150,13 @@ def testIds():
 @app.route('/viewResults')
 def viewResults():
     # result = mongo.db.plantRepo.find()
-    result = mongo.db.plantRepo.find({'points':{'$gt':5}})
+    # result = mongo.db.plantRepo.find({'points':{'$gt':5}})
+    startTime = datetime.strptime("2003-01-12", format_string)
+    # result= mongo.db.plantRepo.find({'birthDate':{'$gt':startTime}})
+    endTime = datetime.strptime("2010-01-12", format_string)
+    # result = mongo.db.plantRepo.find({'$and':[{'birthDate':{'$gt':startTime}},{'birthDate':{'$lt':endTime}} ]})
+     result = mongo.db.plantRepo.find(
+        {'$or':[{'owner_name':'Sarah'},{'owner_name':'Martha'} ]}) # logic operator $or 
     print(result)
     return render_template("viewResults.html",result=result)
 
