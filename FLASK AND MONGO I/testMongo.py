@@ -68,65 +68,65 @@ def insertTest():
 @app.route('/insertMany')
 def insertMany():
     data = [
-{'owner_name': 'Sarah',
-'plant_name' : 'Snake Plant',
-'birthDate':'2002-06-12',
-'geoLoc': 'Montreal',
-'descript': 'Description for the plant',
-'imagePath': 'images/one.png'
-},
-{
-'owner_name': 'Sarah',
-'plant_name' :'Cactus',
-'birthDate' :'2005-06-13',
-'geoLoc':'Toronto',
-'descript':'Description for the plant',
-'imagePath': 'images/seven.png'
-},
- 
- {
-'owner_name': 'Sarah',
-'plant_name' : 'Agapanthus',
-'birthDate': '2003-03-19',
-'geoLoc': 'Halifax',
-'descript': 'Description for the plant',
-'imagePath': 'images/seventeen.png'
-},
- {
-'owner_name': 'Stephen',
-'plant_name' : 'Baby Rubber Plant',
-'birthDate ': '1999-07-18',
-'geoLoc': 'Edinborough',
-'descript':'Description for the plant',
-'imagePath': 'images/ten.png'
-},
- 
-{
-'owner_name': 'Stephen',
-'plant_name' : 'Dahlia',
-'birthDate' :'2000-05-06',
-'geoLoc':'London',
-'descript':'Description for the plant',
-'imagePath': 'images/thirteen.png'
-},
- 
-{
-'owner_name' : 'Harold',
-'plant_name' : 'Daphne',
-'birthDate': '2012-10-21',
-'geoLoc':'New York',
-'descript':'Description for the plant',
-'imagePath': 'images/three.png'
-},
-{
-'owner_name' : 'Martha',
-'plant_name' : 'Daylily',
-'birthDate' :'2017-08-21',
-'geoLoc':'Paris',
-'descript':'Description for the plant',
-'imagePath': 'images/nine.png'
-}
-]
+    {'owner_name': 'Sarah',
+    'plant_name' : 'Snake Plant',
+    'birthDate':'2002-06-12',
+    'geoLoc': 'Montreal',
+    'descript': 'Description for the plant',
+    'imagePath': 'images/one.png'
+    },
+    {
+    'owner_name': 'Sarah',
+    'plant_name' :'Cactus',
+    'birthDate' :'2005-06-13',
+    'geoLoc':'Toronto',
+    'descript':'Description for the plant',
+    'imagePath': 'images/seven.png'
+    },
+    
+    {
+    'owner_name': 'Sarah',
+    'plant_name' : 'Agapanthus',
+    'birthDate': '2003-03-19',
+    'geoLoc': 'Halifax',
+    'descript': 'Description for the plant',
+    'imagePath': 'images/seventeen.png'
+    },
+    {
+    'owner_name': 'Stephen',
+    'plant_name' : 'Baby Rubber Plant',
+    'birthDate ': '1999-07-18',
+    'geoLoc': 'Edinborough',
+    'descript':'Description for the plant',
+    'imagePath': 'images/ten.png'
+    },
+    
+    {
+    'owner_name': 'Stephen',
+    'plant_name' : 'Dahlia',
+    'birthDate' :'2000-05-06',
+    'geoLoc':'London',
+    'descript':'Description for the plant',
+    'imagePath': 'images/thirteen.png'
+    },
+    
+    {
+    'owner_name' : 'Harold',
+    'plant_name' : 'Daphne',
+    'birthDate': '2012-10-21',
+    'geoLoc':'New York',
+    'descript':'Description for the plant',
+    'imagePath': 'images/three.png'
+    },
+    {
+    'owner_name' : 'Martha',
+    'plant_name' : 'Daylily',
+    'birthDate' :'2017-08-21',
+    'geoLoc':'Paris',
+    'descript':'Description for the plant',
+    'imagePath': 'images/nine.png'
+    }
+    ]
     try:
         # insert many works :)
         result = mongo.db.plantRepo.insert_many(data)
@@ -143,7 +143,55 @@ def testIds():
 # a route
 @app.route('/viewResults')
 def viewResults():
-    result = mongo.db.plantRepo.find()
+    # result = mongo.db.plantRepo.find()
+    result = mongo.db.plantRepo.find({'points':{'$gt':5}})
     print(result)
     return render_template("viewResults.html",result=result)
+
+
+@app.route('/updateOne') # route for button from testIntert.html 
+def updateOne():
+    #return redirect(url_for("insertTest"))
+    try: # find the document according to certain criteria and then choose which field to update
+        updatedRepoItem= mongo.db.plantRepo.find_one_and_update(
+            {'plant_name' :'Agapanthus'}, # find the document whos plant name is Agapanthus 
+            {'$set':{'descript':'a more precise description'}} # set it to a descript field 
+            )
+        return redirect(url_for("insertTest"))
+    except Exception as e:
+        print(e)
+
+@app.route('/updatePoints')
+def updatePoints():
+    try:
+        updatedRepoItem= mongo.db.plantRepo.find_one_and_update(
+            {'user' :'maria'}, # insert a new document with a user named 'maria' (string)
+            {'$inc':{'points':2}} #  points (int) field
+            )
+        return redirect(url_for("insertTest"))
+    except Exception as e:
+        print(e)
+
+@app.route('/updateOneRepeat')
+def updateOneRepeat():
+    try:
+        updatedRepoItem= mongo.db.plantRepo.find_one_and_update(
+            {'owner_name' :'Sarah'},
+            {'$set':{'descript':'a more precise description for all sarahs','title':'test123'}}
+            )
+        return redirect(url_for("insertTest"))
+    except Exception as e:
+        print(e)
+
+@app.route('/updateMany')
+def updateMany():
+     try:
+        updatedRepoItem= mongo.db.plantRepo.update_many(
+            {'owner_name' :'Sarah'},
+            {'$set':{'descript':'a more precise description for all sarahs','title':'testALL'}}
+            )
+        return redirect(url_for("insertTest"))
+     except Exception as e:
+        print(e)
+        
 app.run(debug = True)
