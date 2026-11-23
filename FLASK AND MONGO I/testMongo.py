@@ -156,8 +156,8 @@ def viewResults():
     endTime = datetime.strptime("2010-01-12", format_string)
     # result = mongo.db.plantRepo.find({'$and':[{'birthDate':{'$gt':startTime}},{'birthDate':{'$lt':endTime}} ]})
     # result = mongo.db.plantRepo.find({'$or':[{'owner_name':'Sarah'},{'owner_name':'Martha'} ]}) # logic operator $or 
-    result = mongo.db.plantRepo.find({'$or':[{'owner_name':'Sarah'},{'owner_name':'Martha'}]}).sort("birthDate",1) # sort 
-
+    # result = mongo.db.plantRepo.find({'$or':[{'owner_name':'Sarah'},{'owner_name':'Martha'}]}).sort("birthDate",1) # sort 
+    result = mongo.db.plantRepo.find({'$or':[{'owner_name':'Sarah'},{'owner_name':'Martha'}]}).sort("birthDate",-1).limit(2) # limit
     print(result)
     return render_template("viewResults.html",result=result)
 
